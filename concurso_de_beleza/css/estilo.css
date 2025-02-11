@@ -1,0 +1,134 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+}
+
+body{
+    background-color: #404040;
+}
+
+#titulo{
+    text-align: center;
+    padding-top: 2%;
+    font-size: 3rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-transform: uppercase;
+    color: #ccc;
+}
+
+#subtitulo{
+    padding-top: 2%;
+    padding-bottom: 1%;
+    font-size: 2rem;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-transform: uppercase;
+    color: #610000;
+    text-align: center;
+}
+
+#list_regras{
+    padding-bottom: 2%;
+}
+
+.regras{ 
+    background-color: #ccc;
+    border-radius:6px;
+    margin: 1% 20% 1% 20%;
+    align-items: center;
+    text-align: center;
+}
+
+.p_regras{
+    font-size: 1.5rem;
+    color: #610000;
+}
+
+#campo{
+    padding: 2%;
+    margin: 2% 20% 4% 20%;
+    background-color: #131313;
+    border-radius: 10px;
+}
+
+#separa_campo {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    justify-content: flex-start; 
+}
+
+.num{
+    color:#131313;
+    padding: 3%;
+    margin: 1% auto 1% auto;
+    font-size: 1rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bolder;
+}
+
+.num:hover{
+    transform: scale(1.1); /* Efeito de hover mais sutil */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+#result{
+    background-color: #131313;
+    color:#ccc;
+    text-align: center;
+    margin: 10%;
+    padding: 4%;
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 40%;
+    height: 80%;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#titulo-resultado{
+    color:#ccc;
+    font-size: 2.5rem;
+    margin-bottom: 1%;
+    margin-top: 8%;
+}
+
+#subtitulo-resultado{
+    color: #015600;
+    font-size: 2rem;
+    margin-bottom: 3%;
+}
+
+#subtitulo-resultado-2{
+    margin: 4% 0 2% 0;
+    font-size: 2rem;
+}
+
+#num-rsultado{
+    color: #015600;
+    font-size: 3rem;
+
+}
+
+#list-sorteio-jogador{
+    color: #015600;
+}
+
+#button-resultado{
+    text-transform: uppercase;
+    padding: 2% 20% 2% 20%;
+    margin-top: 10%;
+    border: none;
+    border-radius: 20px;
+}
+
+#button-resultado:hover{
+    background-color: #610000;
+    color:#ccc;
+    transition: 0.3s;
+    transform: scale(1.1);
+}
