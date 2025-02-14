@@ -133,9 +133,11 @@ function nextRodada(end){
     
     let container = document.getElementById('result');
     container.remove();
+        
     let nbutao = document.getElementById(end);
-    nbutao.style.color = "#131313;"
-    nbutao.style.backgroundColor = " ";
+    nbutao.style.color = "#131313";
+    nbutao.style.backgroundColor = "#FFFFFF";
+        
     addBotao();
 
 }
