@@ -1,4 +1,7 @@
 let i = 1;
+let cont = 0;
+let pontosJogadorDeVerdade = 0;
+
 
 function addBotao() {
         let container = document.getElementById('separa_campo');
@@ -26,12 +29,11 @@ window.onload = addBotao;
 //seleciona o botão e muda sua cor
 function selectBotao(idelement){
     
-    let cont = 0;
     let button = document.getElementById(idelement);  //pega o elemento pelo id
     button.style.backgroundColor = '#610000';  // muda a cor de fundo
     button.style.color = '#ccc';  // muda a cor do número do botão
 
-    cont++;
+    ++cont;
     result(cont,idelement); //chama a função do resultado da primeria rodada
 }
 
@@ -57,17 +59,20 @@ function result(contador, element) {
 
     let div = `<div id="result">
             <h2 id="titulo-resultado">Resultado da Partida ${contador}</h2>
-            <h3 id="subtitulo-resultado">x</h3>
+            <h3 id="subtitulo-resultado"></h3>
             <ul id="result-list">
                 ${resultList}
                 <li id="list-sorteio-jogador">Você: ${element < 10 ? '0' : ''}${element}</li>
             </ul>
             <h3 id="subtitulo-resultado-2">Resultado:</h3>
             <h2 id="num-rsultado">${numresultado}</h2>
-            <button id="button-resultado" onclick="nextRodada()">próxima rodada</button>
+            <button id="button-resultado" onclick="nextRodada(${element})">próxima rodada</button>
         </div>`;
 
     container.innerHTML += div; // Adiciona o resultado
+
+
+    let pontos = new Array(lista.length).fill(0);
 
     const listaComElement = [...lista, element]; // incluir o número do jogador na lista
 
@@ -86,26 +91,51 @@ function result(contador, element) {
     
     if (closest.length > 1) {//se tiver mias de um elemento, é empate
         if (closest.includes(element)) {//se tiver elemento igual e o do jogador estiver entre eles
-            console.log("Empate, o jogador está entre os mais próximos:", closest);
+            let h3 = document.getElementById("subtitulo-resultado");
+            pontosJogadorDeVerdade -= 1;
+            let text = `Você Empatou! Você e todos os outros jogadores perderam 1 ponto. Contagem: ${pontosJogadorDeVerdade}.`;
+            h3.innerHTML += text;
+            h3.style.color = "#610000";
         } else {//se o jogador não estiver entre o empate
-            console.log("Empate entre os números mais próximos, o jogador não está entre eles:", closest);
+            let h3 = document.getElementById("subtitulo-resultado");
+            pontosJogadorDeVerdade -= 1;
+            let text = `Todos os jogadores perderam 1 ponto. Contagem: ${pontosJogadorDeVerdade}.`;
+            h3.innerHTML += text;
+            h3.style.color = "#610000";
         }
     } else {
         if (closest[0] === element) {//se o ganahdor ganhar
-            console.log("O jogador ganhou, o número mais próximo é", closest[0]);
+            let h3 = document.getElementById("subtitulo-resultado");
+            let text = `Você Venceu! Você não perde ponto. Contagem: ${pontosJogadorDeVerdade}.`;
+            h3.innerHTML += text;
         } else {//se o ganhador perder e não houver
-            console.log("O jogador perdeu, o número mais próximo é", closest[0]);
+            let h3 = document.getElementById("subtitulo-resultado");
+            pontosJogadorDeVerdade -= 1;
+            let text = `Você perdeu 1 ponto. Contagem: ${pontosJogadorDeVerdade}.`;
+            h3.innerHTML += text;
+            h3.style.color = "#610000";
         }
     }    
+
+    closest.forEach(value => {
+        const index = lista.indexOf(value);
+        if (index !== -1) {
+            pontos[index] -= 1; // Jogadores que empataram também perdem ponto
+        }
+    });
 
 }
 
 
 
-
 //inicia uma nova rodada
-function nextRodada(){
+function nextRodada(end){
     
+    let container = document.getElementById('result');
+    container.remove();
+    let nbutao = document.getElementById(end);
+    nbutao.style.color = "#131313;"
+    nbutao.style.backgroundColor = " ";
     addBotao();
 
 }
