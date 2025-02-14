@@ -2,6 +2,29 @@ let i = 1;
 let cont = 0;
 let pontosJogadorDeVerdade = 0;
 
+let time = 0;
+
+//função pra atualizar contagem e encerrar o jogo quando tempo acabar.
+        function atualizarContagem() {
+            time++;
+            document.getElementById('time').textContent = time;
+            
+            // Para o contador após 5 minutos (300 segundos)
+            if (time >= 300) {
+                clearInterval(intervalo);
+
+                let campo = document.getElementById('campo');
+                campo.remove();
+
+                let h3 = document.getElementById('main');
+                let text = `<h3 id="timeoute">Você perdeu para o tempo!</h3>`;
+
+                h3.innerHTML += text;
+            }
+        }
+
+// Inicia a execução da função de contagem a cada segundo
+let intervalo = setInterval(atualizarContagem, 1000);
 
 function addBotao() {
         let container = document.getElementById('separa_campo');
@@ -89,33 +112,45 @@ function result(contador, element) {
         }
     }
     
-    if (closest.length > 1) {//se tiver mias de um elemento, é empate
-        if (closest.includes(element)) {//se tiver elemento igual e o do jogador estiver entre eles
-            let h3 = document.getElementById("subtitulo-resultado");
-            pontosJogadorDeVerdade -= 1;
-            let text = `Você Empatou! Você e todos os outros jogadores perderam 1 ponto. Contagem: ${pontosJogadorDeVerdade}.`;
-            h3.innerHTML += text;
-            h3.style.color = "#610000";
-        } else {//se o jogador não estiver entre o empate
-            let h3 = document.getElementById("subtitulo-resultado");
-            pontosJogadorDeVerdade -= 1;
-            let text = `Todos os jogadores perderam 1 ponto. Contagem: ${pontosJogadorDeVerdade}.`;
-            h3.innerHTML += text;
-            h3.style.color = "#610000";
-        }
-    } else {
-        if (closest[0] === element) {//se o ganahdor ganhar
-            let h3 = document.getElementById("subtitulo-resultado");
-            let text = `Você Venceu! Você não perde ponto. Contagem: ${pontosJogadorDeVerdade}.`;
-            h3.innerHTML += text;
-        } else {//se o ganhador perder e não houver
-            let h3 = document.getElementById("subtitulo-resultado");
-            pontosJogadorDeVerdade -= 1;
-            let text = `Você perdeu 1 ponto. Contagem: ${pontosJogadorDeVerdade}.`;
-            h3.innerHTML += text;
-            h3.style.color = "#610000";
-        }
-    }    
+    if(pontosJogadorDeVerdade !== -9){
+        if (closest.length > 1) {//se tiver mias de um elemento, é empate
+            if (closest.includes(element)) {//se tiver elemento igual e o do jogador estiver entre eles
+                let h3 = document.getElementById("subtitulo-resultado");
+                pontosJogadorDeVerdade -= 1;
+                let text = `Você Empatou! Você e todos os outros jogadores perderam 1 ponto. Contagem: ${pontosJogadorDeVerdade}.`;
+                h3.innerHTML += text;
+                h3.style.color = "#610000";
+            } else {//se o jogador não estiver entre o empate
+                let h3 = document.getElementById("subtitulo-resultado");
+                pontosJogadorDeVerdade -= 1;
+                let text = `Todos os jogadores perderam 1 ponto. Contagem: ${pontosJogadorDeVerdade}.`;
+                h3.innerHTML += text;
+                h3.style.color = "#610000";
+            }
+        } else {
+            if (closest[0] === element) {//se o ganahdor ganhar
+                let h3 = document.getElementById("subtitulo-resultado");
+                let text = `Você Venceu! Você não perde ponto. Contagem: ${pontosJogadorDeVerdade}.`;
+                h3.innerHTML += text;
+            } else {//se o ganhador perder e não houver
+                let h3 = document.getElementById("subtitulo-resultado");
+                pontosJogadorDeVerdade -= 1;
+                let text = `Você perdeu 1 ponto. Contagem: ${pontosJogadorDeVerdade}.`;
+                h3.innerHTML += text;
+                h3.style.color = "#610000";
+            }
+        }    
+    }else{
+                let h3 = document.getElementById("subtitulo-resultado");
+                let b = document.getElementById("button-resultado");
+                let main = document.getElementById("main");
+                main.remove();
+                b.remove();
+                //pontosJogadorDeVerdade -= 1;
+                let text = `Você perdeu o jogo!`;
+                h3.innerHTML += text;
+                h3.style.color = "#610000";
+    }
 
     closest.forEach(value => {
         const index = lista.indexOf(value);
@@ -133,11 +168,11 @@ function nextRodada(end){
     
     let container = document.getElementById('result');
     container.remove();
-        
+
     let nbutao = document.getElementById(end);
     nbutao.style.color = "#131313";
     nbutao.style.backgroundColor = "#FFFFFF";
-        
+
     addBotao();
 
 }
